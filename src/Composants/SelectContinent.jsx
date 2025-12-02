@@ -6,21 +6,18 @@ import { useCountrieContext } from '../Hook/CountrieContext';
 const SelectContinent = () => {
 
    const [isOpen , setIsOpen] = useState(false) 
-   const [selected , setSelected] = useState('africa')
-   const options = ["europe", "africa", "asi"];
-      const {  fetchAPi } = useCountrieContext();
+   const [selected , setSelected] = useState('Africa')
+   const options = ["Africa","Europe", "Asia","America" ,"oceania"];
+   const {  fetchAPi } = useCountrieContext();
 
 
 
+return (
 
-
-    return (
     <div className="relative w-60">
-
         <button onClick={ e =>{ (e.preventDefault());  setIsOpen(!isOpen)} }
             
-            className="w-full bg-white border border-gray-300 px-4 py-2 rounded-lg flex justify-between items-center text-gray-700"
-            >
+            className="w-full bg-white border border-gray-300 px-4 py-2 rounded-lg flex justify-between items-center text-gray-700">
           <span> {selected}</span>
          <svg
           className={`w-4 h-4 transform transition-transform ${isOpen ? "rotate-180" : ""}`}
@@ -31,7 +28,7 @@ const SelectContinent = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
         </svg>
         </button>
-
+        
         {
             isOpen && (
                 <ul className='absolute bg-white left-0 right-0 border border-gray-300 mt-1 rounded-lg shadow-lg z-20'>
@@ -45,12 +42,10 @@ const SelectContinent = () => {
                              {item}
 
                         </li>
-
                     ))}
-                </ul>
+             </ul>
             )
-        }
-    
+        }   
     </div>
   );
 }; 

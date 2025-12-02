@@ -1,76 +1,102 @@
-import React, { createContext, useContext , useState ,useEffect } from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react'
 import { apiURL } from './../Composants/Util/api';
 
 const countrieContext = createContext()
 
-const CountrieContext = ({children}) => {
+const CountrieContext = ({ children }) => {
 
-    const [countries , setCountries] = useState([])
-    const [loading , setLoading] = useState(true)
-    const [error , setError] = useState(null)
+  const [countries, setCountries] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  const [compteur, setCompteur] = useState(0);
 
-    const fetchAPi = (continent = "") => {
-
-
-        setLoading(true);
-        setError(null);
-
-          fetch(`${apiURL}/${continent}`)
-        //   fetch(`${apiURL}/${continent}`)
-        .then( response  => {
-
-            if(!response.ok){
-                throw Error('erreur du fetch ')
-            }
-            return  response.json();
-
-        })
-        .then(data  => {
-            setLoading(false)
-            setCountries(data)
-            console.log(data);
-
-        })
-        .catch(err => {
-            setError(err.message);
-            setLoading(false)
-        })
-
-        
+  const [lePays, setLePays] = useState("");       
+  const [paysData, setPaysData] = useState(null);  
 
 
-     return { countries , error , loading}
+  const fetchAPi = async (continent = "Africa") => {
+    setLoading(true);
+    setError(null);
 
-    } 
+    try {
+      const response = await fetch(`${apiURL}/${continent}`);
 
-     useEffect(() => {
+      if (!response.ok) throw new Error('Erreur du fetch');
 
-        fetchAPi('africa')
+      const data = await response.json();
 
-    }, [])
+      setCountries(data);
+      setCompteur(data.length);
+
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
-    
+  const fetchPays = async () => {
+    if (!lePays) return;
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`https://restcountries.com/v3.1/name/${lePays}`);
+
+      if (!response.ok) throw new Error('Erreur du fetch');
+
+      const data = await response.json();
+
+      setPaysData(data);
+
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
-    const contextValue = {
-       
+  useEffect(() => {
+      setTimeout(() => {
+    fetchAPi("Africa");
+     },2000)
+  }, []);
+
+
+  useEffect(() => {
+    if (lePays) {
+     setTimeout(() => {
+          fetchPays();
+     },2000)
+    }
+  }, [lePays]);
+
+
+  const contextValue = {
     countries,
+    compteur,
     loading,
     error,
-    fetchAPi,
-        
 
-    }
+    fetchAPi,
+
+    lePays,
+    setLePays,    
+    fetchPays,
+    paysData,
+  };
 
   return (
     <countrieContext.Provider value={contextValue}>
-       {children}
+      {children}
     </countrieContext.Provider>
-  )
-}
+  );
+};
 
 export const useCountrieContext = () => useContext(countrieContext);
 
-export default CountrieContext
+export default CountrieContext;
