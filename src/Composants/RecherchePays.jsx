@@ -77,7 +77,7 @@ const handleSearch = (e) => {
         />
         <button
           type='submit'
-          className='text-white bg-green-700 px-4 py-3'
+          className='text-white bg-green-700 px-4 py-3 '
         >
           Recherche
         </button>
