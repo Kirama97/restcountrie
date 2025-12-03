@@ -68,17 +68,17 @@ const CountrieContext = ({ children }) => {
 
 
   useEffect(() => {
-      setTimeout(() => {
+    
     fetchApi("Africa");
-     },1500)
+
   }, []);
 
 
   useEffect(() => {
     if (lePays) {
-     setTimeout(() => {
+    
           fetchPays();
-     },200)
+   
     }
   }, [lePays]);
 
