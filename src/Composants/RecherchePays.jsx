@@ -62,7 +62,7 @@ const handleSearch = (e) => {
 
 
   return (
-     <div>
+     <div className='max-md:w-full'>
       <form
         onSubmit={handleSearch}
         className='flex items-center gap-5 justify-between bg-neutral-50 overflow-hidden rounded-lg'
@@ -77,7 +77,7 @@ const handleSearch = (e) => {
         />
         <button
           type='submit'
-          className='text-white bg-green-700 w-30 px-9 md:px-4 py-3 '
+          className='text-white bg-green-700 w-30 max-md:hidden md:px-4 py-3 '
         >
           Recherche
         </button>
