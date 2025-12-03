@@ -30,7 +30,7 @@ const AllCountrie = () => {
   return (
 
 
-        <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-x-3 md:gap-x-7 gap-y-4 md:gap-y-10  ">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 md:gap-x-7 gap-y-4 md:gap-y-10  ">
 
               {/* AFFICHAGE DES PAYS */}
               {!loading && !error && countries.length > 0 && (
