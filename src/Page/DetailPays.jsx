@@ -19,13 +19,13 @@ function DetailPays() {
   }, [name]);
 
 
-  if (loading) {
-    return (
-      <div className="w-full h-screen flex items-center justify-center">
-        <div className="animate-spin h-16 w-16 border-4 border-green-500 border-t-transparent rounded-full"></div>
-      </div>
-    );
-  }
+//   if (loading) {
+//     return (
+//       <div className="w-full h-screen flex items-center justify-center">
+//         <div className="animate-spin h-16 w-16 border-4 border-green-500 border-t-transparent rounded-full"></div>
+//       </div>
+//     );
+//   }
 
     if (loading || !paysData) {
     return (
@@ -43,13 +43,13 @@ function DetailPays() {
     );
   }
 
-  if (!paysData || !paysData[0]) {
-    return (
-      <p className="text-center text-red-600 text-xl mt-10">
-        Pays introuvable…
-      </p>
-    );
-  }
+//   if (!paysData || !paysData[0]) {
+//     return (
+//       <p className="text-center text-red-600 text-xl mt-10">
+//         Pays introuvable…
+//       </p>
+//     );
+//   }
 
   const pays = paysData[0];
 
