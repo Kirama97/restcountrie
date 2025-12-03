@@ -8,7 +8,7 @@ const SelectContinent = () => {
    const [isOpen , setIsOpen] = useState(false) 
    const [selected , setSelected] = useState('Africa')
    const options = ["Africa","Europe", "Asia","America" ,"oceania"];
-   const {  fetchAPi } = useCountrieContext();
+   const {  fetchApi } = useCountrieContext();
 
 
 
@@ -37,7 +37,7 @@ return (
                         <li key={index} onClick={ () => {
                             setSelected(item)
                             setIsOpen(false);
-                            fetchAPi(item);
+                            fetchApi(item);
                         }} className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700" >
                              {item}
 

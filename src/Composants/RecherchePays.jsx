@@ -1,20 +1,67 @@
-import React from 'react'
+import React , {useState} from 'react'
+import drapeau from '../Assets/drapeau.svg';
+import { useCountrieContext } from '../Hook/CountrieContext';
+
+
+
+
+
 
 const RecherchePays = () => {
 
+    const {setCountries , countries ,fetchApi} = useCountrieContext()
+
+    const [recherche , setRecherche] = useState("")
+
+   
+    const handleSearch = (e) =>{
+        e.preventDefault();
+
+        // if(recherche === "") return ;
+
+        console.log(recherche);
+
+
+         const filtrer = countries.filter( (countrie) => countrie.name.common.toLowerCase().includes(recherche.toLowerCase()) );
+         setRecherche("");
+         if(recherche.trim() === "") {
+              fetchApi("Africa");
+              return;
+         }
+
+
+    }
+
+     const handleChange = (e) =>{
+        e.preventDefault()
+        let value = e.target.value;
+        setRecherche(value);
+        const filtrer = countries.filter( (countrie) => countrie.name.common.toLowerCase().includes(value.toLowerCase()) );
+        setCountries(filtrer);
+         if(value.trim() === "") {
+              fetchApi("Africa");
+              return;
+         }
+
+
+     }
   
     
 
 
   return (
-    <form  className='flex items-center gap-5 justify-between bg-neutral-50 overflow-hidden   rounded-lg' >
-         <svg className=' ' xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
-        <input type="text"   className='text-neutral-800 border-none py-3 outline-none ' placeholder='Recherche pays....' />
+    <form onSubmit={handleSearch}  className='flex items-center gap-5 justify-between bg-neutral-50 overflow-hidden   rounded-lg' >
+        <img src={drapeau} alt="" className='ml-4' />
+        <input type="text"   className='text-neutral-800 border-none py-3 outline-none ' placeholder='Recherche pays....' 
+         value={recherche}
+         onChange={handleChange}
+        />
         <button
+        type='submit'
         className='text-white bg-green-700 px-4 py-3 '
 
         >
-            Recherche
+        Recherche
         </button>
          
     </form>

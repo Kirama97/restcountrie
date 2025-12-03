@@ -15,7 +15,7 @@ const CountrieContext = ({ children }) => {
   const [paysData, setPaysData] = useState(null);  
 
 
-  const fetchAPi = async (continent = "Africa") => {
+  const fetchApi = async (continent = "Africa") => {
     setLoading(true);
     setError(null);
 
@@ -64,10 +64,12 @@ const CountrieContext = ({ children }) => {
     }
   };
 
+ 
+
 
   useEffect(() => {
       setTimeout(() => {
-    fetchAPi("Africa");
+    fetchApi("Africa");
      },1500)
   }, []);
 
@@ -81,14 +83,16 @@ const CountrieContext = ({ children }) => {
   }, [lePays]);
 
 
+  
+
+
   const contextValue = {
     countries,
+    setCountries,
     compteur,
     loading,
     error,
-
-    fetchAPi,
-
+    fetchApi,
     lePays,
     setLePays,    
     fetchPays,
