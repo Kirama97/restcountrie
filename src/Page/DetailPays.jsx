@@ -18,7 +18,7 @@ function DetailPays() {
     setLePays(name);
   }, [name]);
 
-  
+
   if (loading) {
     return (
       <div className="w-full h-screen flex items-center justify-center">
@@ -26,6 +26,14 @@ function DetailPays() {
       </div>
     );
   }
+
+    if (loading || !paysData) {
+    return (
+        <div className="w-full h-screen flex items-center justify-center">
+        <div className="animate-spin h-16 w-16 border-4 border-green-500 border-t-transparent rounded-full"></div>
+        </div>
+    );
+    }
 
   if (error) {
     return (

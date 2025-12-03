@@ -36,12 +36,16 @@ const CountrieContext = ({ children }) => {
     }
   };
 
+ 
 
   const fetchPays = async () => {
     if (!lePays) return;
 
     setLoading(true);
     setError(null);
+    setPaysData(null);
+
+    
 
     try {
       const response = await fetch(`https://restcountries.com/v3.1/name/${lePays}`);
@@ -54,6 +58,7 @@ const CountrieContext = ({ children }) => {
 
     } catch (err) {
       setError(err.message);
+      setPaysData(null)
     } finally {
       setLoading(false);
     }
@@ -63,7 +68,7 @@ const CountrieContext = ({ children }) => {
   useEffect(() => {
       setTimeout(() => {
     fetchAPi("Africa");
-     },2000)
+     },1500)
   }, []);
 
 
@@ -71,7 +76,7 @@ const CountrieContext = ({ children }) => {
     if (lePays) {
      setTimeout(() => {
           fetchPays();
-     },2000)
+     },500)
     }
   }, [lePays]);
 
