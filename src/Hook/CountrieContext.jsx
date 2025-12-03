@@ -78,7 +78,7 @@ const CountrieContext = ({ children }) => {
     if (lePays) {
      setTimeout(() => {
           fetchPays();
-     },500)
+     },200)
     }
   }, [lePays]);
 

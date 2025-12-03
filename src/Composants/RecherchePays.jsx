@@ -10,61 +10,83 @@ import { useCountrieContext } from '../Hook/CountrieContext';
 const RecherchePays = () => {
 
     const {setCountries , countries ,fetchApi} = useCountrieContext()
-
-    const [recherche , setRecherche] = useState("")
+    const [recherche , setRecherche] = useState("");
+    const [notFound, setNotFound] = useState(false);
 
    
-    const handleSearch = (e) =>{
-        e.preventDefault();
+const handleSearch = (e) => {
+    e.preventDefault();
 
-        // if(recherche === "") return ;
-
-        console.log(recherche);
-
-
-         const filtrer = countries.filter( (countrie) => countrie.name.common.toLowerCase().includes(recherche.toLowerCase()) );
-         setRecherche("");
-         if(recherche.trim() === "") {
-              fetchApi("Africa");
-              return;
-         }
-
-
+    if (recherche.trim() === "") {
+      fetchApi("Africa"); 
+      setNotFound(false);
+      return;
     }
 
-     const handleChange = (e) =>{
-        e.preventDefault()
-        let value = e.target.value;
-        setRecherche(value);
-        const filtrer = countries.filter( (countrie) => countrie.name.common.toLowerCase().includes(value.toLowerCase()) );
-        setCountries(filtrer);
-         if(value.trim() === "") {
-              fetchApi("Africa");
-              return;
-         }
+    const filtrer = countries.filter((countrie) =>
+      countrie.name.common.toLowerCase().includes(recherche.toLowerCase())
+    );
 
+    if (filtrer.length === 0) {
+      setNotFound(true);
+    } else {
+      setCountries(filtrer);
+      setNotFound(false);
+    }
+  };
 
-     }
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setRecherche(value);
+
+    if (value.trim() === "") {
+      fetchApi("Africa");
+      setNotFound(false);
+      return;
+    }
+
+    const filtrer = countries.filter((countrie) =>
+      countrie.name.common.toLowerCase().includes(value.toLowerCase())
+    );
+
+    if (filtrer.length === 0) {
+      setNotFound(true);
+      setCountries([]);
+    } else {
+      setCountries(filtrer);
+      setNotFound(false);
+    }
+  };
   
     
 
 
   return (
-    <form onSubmit={handleSearch}  className='flex items-center gap-5 justify-between bg-neutral-50 overflow-hidden   rounded-lg' >
+     <div>
+      <form
+        onSubmit={handleSearch}
+        className='flex items-center gap-5 justify-between bg-neutral-50 overflow-hidden rounded-lg'
+      >
         <img src={drapeau} alt="" className='ml-4' />
-        <input type="text"   className='text-neutral-800 border-none py-3 outline-none ' placeholder='Recherche pays....' 
-         value={recherche}
-         onChange={handleChange}
+        <input
+          type="text"
+          className='text-neutral-800 border-none py-3 outline-none flex-1'
+          placeholder='Recherche pays....'
+          value={recherche}
+          onChange={handleChange}
         />
         <button
-        type='submit'
-        className='text-white bg-green-700 px-4 py-3 '
-
+          type='submit'
+          className='text-white bg-green-700 px-4 py-3'
         >
-        Recherche
+          Recherche
         </button>
-         
-    </form>
+      </form>
+
+      {notFound && (
+        <p className="text-red-600 mt-2">Introuvable</p>
+      )}
+    </div>
   )
 }
 
