@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams ,NavLink  } from "react-router-dom";
 import { useCountrieContext } from "../Hook/CountrieContext";
+
 
 const InfoRow = ({ label, children }) => (
   <div className="flex flex-col mb-3">
@@ -19,13 +20,6 @@ function DetailPays() {
   }, [name]);
 
 
-//   if (loading) {
-//     return (
-//       <div className="w-full h-screen flex items-center justify-center">
-//         <div className="animate-spin h-16 w-16 border-4 border-green-500 border-t-transparent rounded-full"></div>
-//       </div>
-//     );
-//   }
 
     if (loading || !paysData) {
     return (
@@ -43,18 +37,17 @@ function DetailPays() {
     );
   }
 
-//   if (!paysData || !paysData[0]) {
-//     return (
-//       <p className="text-center text-red-600 text-xl mt-10">
-//         Pays introuvable…
-//       </p>
-//     );
-//   }
-
+// 
   const pays = paysData[0];
 
   return (
     <div className="max-w-5xl mx-auto py-10 px-5">
+
+        <NavLink to="/" className="bg-green-600 border-none text-white w-[100px] absolute bottom-10 right-5 flex gap-3 items-center p-3 rounded-full outline-none " >
+        <svg className="bg-transparent text-neutral-600"  xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-big-left-dash-icon lucide-arrow-big-left-dash"><path d="M13 9a1 1 0 0 1-1-1V5.061a1 1 0 0 0-1.811-.75l-6.835 6.836a1.207 1.207 0 0 0 0 1.707l6.835 6.835a1 1 0 0 0 1.811-.75V16a1 1 0 0 1 1-1h2a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1z"/><path d="M20 9v6"/></svg>
+         Retour
+         
+         </NavLink>
 
       {/* Drapeau */}
       <div className="flex flex-col items-center mb-10">
@@ -95,53 +88,3 @@ export default DetailPays;
 
 
 
-
-// import React, { useEffect } from 'react'
-// import { useParams } from 'react-router-dom'
-// import { useCountrieContext } from '../Hook/CountrieContext'
-
-
-
-// const DetailPays = () => {
-//    const {name} = useParams()
-//   const {setLePays, paysData ,loading ,error} = useCountrieContext()
-
-//    useEffect(() => {
-//     setLePays(name);
-//   }, [name]);
-
- 
-
-//   console.log(paysData);
-
-  
-//   if (loading) return <p>Chargement...</p>;
-
-//   if (!paysData) return <p>Pays non trouvé</p>;
-
- 
-   
-//   return (
-
-//      <div>
-
-//         { loading &&  
-//         <div className="fixed inset-0 flex flex-col gap-5 justify-center items-center z-50">
-//             <div className="w-10 h-10 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
-//             <p className="text-gray-600 text-md">Chargement...</p>
-//         </div>
-//         }
-
-//         {error && <p className="text-red-500">Une erreur est survenue.</p>}
-            
-//             <div className='w-screen h-screen'>
-//             <h1>{paysData[0].name.common}</h1>
-//             <img src={paysData[0].flags.png} alt="" />
-//             </div>
-//      </div>
-
-     
-//   )
-// }
-
-// export default DetailPays

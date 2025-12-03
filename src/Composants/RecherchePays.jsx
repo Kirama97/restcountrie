@@ -70,14 +70,14 @@ const handleSearch = (e) => {
         <img src={drapeau} alt="" className='ml-4' />
         <input
           type="text"
-          className='text-neutral-800 border-none py-3 outline-none flex-1'
+          className='text-neutral-800 bg-transparent border-none py-3 outline-none flex-1'
           placeholder='Recherche pays....'
           value={recherche}
           onChange={handleChange}
         />
         <button
           type='submit'
-          className='text-white bg-green-700 px-4 py-3 '
+          className='text-white bg-green-700 w-30 px-9 md:px-4 py-3 '
         >
           Recherche
         </button>
