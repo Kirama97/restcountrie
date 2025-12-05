@@ -8,11 +8,13 @@ const CountrieContext = ({ children }) => {
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectContinent, setSelectContinent] = useState('Africa');
 
   const [compteur, setCompteur] = useState(0);
 
   const [lePays, setLePays] = useState("");       
   const [paysData, setPaysData] = useState(null);  
+
 
 
   const fetchApi = async (continent = "Africa") => {
@@ -27,6 +29,7 @@ const CountrieContext = ({ children }) => {
       const data = await response.json();
 
       setCountries(data);
+      setSelectContinent(continent)
       setCompteur(data.length);
 
     } catch (err) {
@@ -97,6 +100,7 @@ const CountrieContext = ({ children }) => {
     setLePays,    
     fetchPays,
     paysData,
+    selectContinent,
   };
 
   return (

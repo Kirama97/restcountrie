@@ -8,7 +8,8 @@ const SelectContinent = () => {
    const [isOpen , setIsOpen] = useState(false) 
    const [selected , setSelected] = useState('Africa')
    const options = ["Africa","Europe", "Asia","America" ,"oceania"];
-   const {  fetchApi } = useCountrieContext();
+   
+   const {  fetchApi ,  } = useCountrieContext();
 
 
 
